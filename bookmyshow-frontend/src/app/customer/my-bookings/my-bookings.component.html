@@ -1,0 +1,16 @@
+<h2>🎫 My Bookings</h2>
+
+<mat-card *ngFor="let ticket of tickets" class="ticket-card">
+  <mat-card-title>{{ ticket.movieName }} — ₹{{ ticket.ticketPrice }}</mat-card-title>
+  <mat-card-subtitle>
+    {{ ticket.theatreName }} | Screen {{ ticket.screenNumber }}
+  </mat-card-subtitle>
+  <mat-card-content>
+    Date: {{ ticket.showDate }} <br />
+    Time: {{ ticket.showTime }} <br />
+    Seats: {{ ticket.seatNo.join(', ') }}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="cancelTicket(ticket.ticketId)">Cancel</button>
+  </mat-card-actions>
+</mat-card>

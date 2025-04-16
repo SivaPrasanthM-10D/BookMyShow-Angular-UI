@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Select Seats</h2>
+<mat-dialog-content>
+  <div class="seats">
+    <button *ngFor="let seat of data.availableSeats" mat-raised-button
+            [color]="selectedSeats.includes(seat) ? 'warn' : ''"
+            (click)="toggleSeat(seat)">
+      {{ seat }}
+    </button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="confirmBooking()" [disabled]="selectedSeats.length === 0">
+    Confirm
+  </button>
+</mat-dialog-actions>

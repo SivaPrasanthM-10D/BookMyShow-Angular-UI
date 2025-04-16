@@ -1,0 +1,73 @@
+.homepage-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 22px;
+  color: #fff;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.homepage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px); /* Adjust for toolbar height */
+  background: linear-gradient(to right, #e0f7fa, #ffffff);
+  padding: 2rem;
+}
+
+.homepage-card {
+  max-width: 500px;
+  padding: 2rem;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.homepage-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #3f51b5;
+}
+
+.homepage-subtitle {
+  font-size: 16px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  color: #666;
+}
+
+
+.movie-list-section {
+  padding: 2rem 4rem;
+  background-color: #f4f6f8;
+}
+
+.movie-list-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.movie-card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+}

@@ -1,0 +1,32 @@
+<!-- layout.component.html -->
+<mat-toolbar color="primary">
+  <span class="logo">BookMyShow</span>
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="role === 'Admin'">
+    <a mat-button routerLink="/admin">Dashboard</a>
+    <a mat-button routerLink="/admin/movies">Movies</a>
+    <a mat-button routerLink="/admin/profile">Profile</a>
+  </ng-container>
+
+  <ng-container *ngIf="role === 'Customer'">
+    <a mat-button routerLink="/customer">Home</a>
+    <a mat-button routerLink="/customer/account">Account</a>
+    <a mat-button routerLink="/customer/profile">Profile</a>
+  </ng-container>
+
+  <ng-container *ngIf="role === 'TheatreOwner'">
+    <a mat-button routerLink="/theatre-owner">Dashboard</a>
+    <a mat-button routerLink="/theatre-owner/theatre">My Theatre</a>
+    <a mat-button routerLink="/theatre-owner/screens">Screens</a>
+    <a mat-button routerLink="/theatre-owner/shows">Shows</a>
+    <a mat-button routerLink="/theatre-owner/profile">Profile</a>
+  </ng-container>
+
+  <button mat-button routerLink="/login" *ngIf="!role">Login</button>
+  <button mat-button (click)="logout()" *ngIf="role">Logout</button>
+</mat-toolbar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,23 @@
+<div class="movie-detail-container" *ngIf="movie">
+  <mat-card>
+    <mat-card-title>{{ movie.title }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Genre:</strong> {{ movie.genre }}</p>
+      <p><strong>Duration:</strong> {{ movie.duration }} mins</p>
+      <p><strong>Rating:</strong> {{ movie.rating }} / 5</p>
+    </mat-card-content>
+  </mat-card>
+
+  <h3 style="margin-top: 1.5rem;">Select Theatre & Showtime</h3>
+
+  <mat-card *ngFor="let theatre of theatres" class="theatre-block">
+    <mat-card-title>{{ theatre.theatreName }}</mat-card-title>
+    <mat-card-content>
+      <div class="showtimes">
+        <button mat-raised-button color="primary" *ngFor="let show of theatre.shows" (click)="proceedToSeatSelection(show)">
+          {{ show.showDate }} | {{ show.showTime }}
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

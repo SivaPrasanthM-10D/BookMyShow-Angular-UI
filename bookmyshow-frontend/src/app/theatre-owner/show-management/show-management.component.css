@@ -1,0 +1,22 @@
+.show-container {
+  padding: 24px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.full-width-table {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}

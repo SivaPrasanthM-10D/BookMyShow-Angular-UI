@@ -1,0 +1,8 @@
+.dashboard-card {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    text-align: center;
+    background: #f7f7f7;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }  

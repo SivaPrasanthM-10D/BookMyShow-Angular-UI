@@ -1,0 +1,47 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.theatre-details {
+  margin-bottom: 24px;
+}
+
+.mat-card {
+  padding: 16px;
+}
+
+.mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.mat-card-subtitle {
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.mat-card-content p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.theatre-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+button[mat-raised-button] {
+  min-width: 120px;
+}

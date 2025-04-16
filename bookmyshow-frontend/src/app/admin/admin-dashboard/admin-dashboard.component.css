@@ -1,0 +1,31 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.stat-card,
+.top-movies-card {
+    padding: 10px;
+}
+
+.stat-card h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+mat-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.movie-title {
+    font-weight: 500;
+}
+
+.rating {
+    color: #fbc02d;
+    font-weight: bold;
+}

@@ -1,0 +1,19 @@
+<div class="admin-header">
+    <h2>Manage Movies</h2>
+    <button mat-raised-button color="primary" (click)="navigateToAdd()">Add New Movie</button>
+  </div>
+  
+  <div class="movie-grid">
+    <mat-card *ngFor="let movie of movies" class="movie-card">
+      <mat-card-title>{{ movie.title }}</mat-card-title>
+      <mat-card-content>
+        <p>Genre: {{ movie.genre }}</p>
+        <p>Duration: {{ movie.duration }} mins</p>
+        <p>Rating: {{ movie.rating }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="editMovie(movie.movieId)">Edit</button>
+        <button mat-button color="warn" (click)="deleteMovie(movie.movieId)">Delete</button>
+      </mat-card-actions>      
+    </mat-card>
+  </div>  

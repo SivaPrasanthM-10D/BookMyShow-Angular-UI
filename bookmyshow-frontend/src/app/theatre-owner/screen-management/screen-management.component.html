@@ -1,0 +1,27 @@
+<div class="container">
+  <h2 class="mat-headline">Manage Screens</h2>
+
+  <form [formGroup]="screenForm" (ngSubmit)="addScreen()" class="screen-form">
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Screen Number</mat-label>
+      <input matInput type="number" formControlName="screenNumber" required />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Add Screen</button>
+  </form>
+
+  <mat-divider class="my-3"></mat-divider>
+
+  <div *ngIf="screens.length > 0">
+    <mat-list>
+      <mat-list-item *ngFor="let screen of screens">
+        <div class="screen-info">
+          Screen {{ screen.screenNumber }}
+        </div>
+        <button mat-icon-button color="warn" (click)="deleteScreen(screen.screenId)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

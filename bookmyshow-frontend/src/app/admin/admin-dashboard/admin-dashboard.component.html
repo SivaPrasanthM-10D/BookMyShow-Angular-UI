@@ -1,0 +1,18 @@
+<div class="dashboard-container">
+    <mat-card class="stat-card">
+      <mat-card-title>Total Movies</mat-card-title>
+      <mat-card-content>
+        <h1>{{ totalMovies }}</h1>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="top-movies-card">
+      <mat-card-title>Top Rated Movies</mat-card-title>
+      <mat-list>
+        <mat-list-item *ngFor="let movie of topRatedMovies">
+          <div class="movie-title">{{ movie.title }}</div>
+          <span class="rating">⭐ {{ movie.rating }}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>  
