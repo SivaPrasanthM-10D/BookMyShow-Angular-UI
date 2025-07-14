@@ -1,27 +1,79 @@
-# BookmyshowFrontend
+# BookMyShow Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+A modern, responsive Angular application that replicates the core features of BookMyShow, including movie browsing, seat selection, booking, payment, user management, and a fully adaptive dark/light theme.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **User Authentication**: Secure login, signup, and session management.
+- **Role-Based Dashboards**: Separate interfaces for Admin, Customer, and Theatre Owner.
+- **Movie Management**: Add, edit, and delete movies (Admin).
+- **Show & Screen Management**: Manage shows and screens (Theatre Owner).
+- **Movie Browsing**: Search, filter, and view movie details.
+- **Seat Selection**: Interactive seat selection with seat count editing and visual feedback.
+- **Booking & Payment**: Book tickets, view bookings, and complete payments with a pre-payment note dialog.
+- **Reviews & Ratings**: Add and view movie reviews and ratings.
+- **Responsive UI**: Fully responsive layout for all devices.
+- **Theme Switcher**: Toggle between dark and light themes, with persistent preference.
+- **Modern UI/UX**: Adaptive colors, custom logo, theme-aware icons, and modern scrollbars.
+- **Session Timeout Handling**: Snackbar notification and redirection on session expiry.
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+- [Node.js](https://nodejs.org/) (v14 or above recommended)
+- [Angular CLI](https://angular.io/cli) (v13 or above recommended)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
 
-## Running unit tests
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/bookmyshow-frontend.git
+   cd bookmyshow-frontend
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Running end-to-end tests
+3. **Run the development server:**
+   ```bash
+   ng serve
+   ```
+   The app will be available at `http://localhost:4200/`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Project Structure
 
-## Further help
+```
+src/app/
+  admin/              # Admin dashboard and features
+  customer/           # Customer dashboard, booking, payment, reviews
+  theatre-owner/      # Theatre owner dashboard and management
+  services/           # Shared Angular services (auth, booking, etc.)
+  models/             # TypeScript models/interfaces
+  shared/             # Shared components (profile, loader, etc.)
+  interceptors/       # HTTP interceptors (auth, loader, error handling)
+  guards/             # Route guards
+  layout/             # Main layout and navigation
+  login/              # Login page
+  signup/             # Signup page
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Customization
+
+- **Theme Colors**: Easily adjust theme colors via CSS variables in `src/styles.css`.
+- **Logo**: Replace the logo in `src/assets/` and update references in the layout component.
+- **API Integration**: Connect to your backend by updating API endpoints in the Angular services.
+
+## Scripts
+
+- `ng serve` — Run the app in development mode.
+- `ng build` — Build the app for production.
+- `ng test` — Run unit tests.
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+**Developed with ❤️ using Angular.**
