@@ -1,0 +1,8 @@
+mat-dialog-content p {
+  margin: 0 0 10px 0;
+  font-size: 1.08rem;
+}
+
+button[mat-flat-button] {
+  min-width: 90px;
+}

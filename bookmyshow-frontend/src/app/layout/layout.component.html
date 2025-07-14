@@ -1,7 +1,12 @@
 <!-- layout.component.html -->
 <mat-toolbar color="primary">
+  <img src="assets/Logo.png" alt="Logo" class="navbar-logo" width="36" height="36" style="margin-right: 10px; vertical-align: middle;" />
   <span class="logo">BookMyShow</span>
   <span class="spacer"></span>
+
+  <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
+    <mat-icon>{{ isDarkTheme ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
 
   <ng-container *ngIf="role === 'Admin'">
     <a mat-button routerLink="/admin">Dashboard</a>
@@ -11,7 +16,7 @@
 
   <ng-container *ngIf="role === 'Customer'">
     <a mat-button routerLink="/customer">Home</a>
-    <a mat-button routerLink="/customer/account">Account</a>
+    <a mat-button routerLink="/customer/bookings">Bookings</a>
     <a mat-button routerLink="/customer/profile">Profile</a>
   </ng-container>
 

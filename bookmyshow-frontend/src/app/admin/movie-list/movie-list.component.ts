@@ -34,4 +34,10 @@ export class MovieListComponent implements OnInit {
   navigateToAdd(): void {
     this.router.navigate(['/admin/add-movie']);
   }
+
+  getPosterUrl(posterUrl: string): string {
+    if (!posterUrl) return '';
+    if (posterUrl.startsWith('http')) return posterUrl;
+    return `https://localhost:44374/${posterUrl}`;
+  }
 }

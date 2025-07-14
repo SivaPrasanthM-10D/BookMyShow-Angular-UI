@@ -26,8 +26,8 @@ export class MovieService {
     return this.http.get(`${this.apiUrl}/${title}`);
   }
 
-  addMovie(movie: Movie): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, movie);
+  addMovie(movie: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, movie);
   }
   
   deleteMovie(id: string): Observable<void> {

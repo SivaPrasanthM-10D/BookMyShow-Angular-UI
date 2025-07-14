@@ -1,0 +1,43 @@
+<div class="rating-dialog-container">
+  <div class="dialog-header">
+    <h2 mat-dialog-title>How was the movie?</h2>
+    <button mat-icon-button class="close-button" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <mat-dialog-content *ngIf="!isLoading">
+    <!-- Initial Star Rating -->
+    <div class="rating-stars-container" *ngIf="!hasRated" (mouseleave)="onStarHover(0)">
+      <button mat-icon-button *ngFor="let star of stars" (click)="setRating(star)" (mouseenter)="onStarHover(star)">
+        <mat-icon [class.rated]="star <= (hoveredRating || rating)">star</mat-icon>
+      </button>
+      <div class="rating-value-display">{{ hoveredRating || rating }}/10</div>
+      <p class="instruction-text">Your ratings matter!</p>
+    </div>
+
+    <!-- Hashtags View -->
+    <div class="hashtags-container" *ngIf="hasRated">
+      <div class="final-rating-display">
+        <mat-icon class="rated">star</mat-icon> {{ rating }}/10
+      </div>
+      <h4 class="question">{{ question }}</h4>
+      <p class="instruction-text">Express yourself with hashtags!</p>
+      <mat-chip-listbox multiple>
+        <mat-chip-option *ngFor="let hashtag of hashtags" [selected]="hashtag.selected" (click)="toggleHashtag(hashtag)">
+          {{ hashtag.label }}
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" *ngIf="!isLoading">
+    <button mat-flat-button color="primary" class="submit-button" (click)="submitRating()" [disabled]="rating === 0">
+      Submit Rating
+    </button>
+  </mat-dialog-actions>
+</div> 

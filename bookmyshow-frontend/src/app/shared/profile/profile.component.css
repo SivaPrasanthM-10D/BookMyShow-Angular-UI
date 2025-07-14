@@ -1,0 +1,58 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+mat-card {
+  max-width: 500px;
+  width: 100%;
+  padding: 32px 28px 24px 28px;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(63,81,181,0.08);
+  background: #fff;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+  color: #3f51b5;
+  font-weight: 600;
+}
+
+mat-form-field {
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+[mat-dialog-actions], .profile-actions {
+  margin-top: 18px;
+  text-align: right;
+}
+
+button[mat-flat-button] {
+  min-width: 90px;
+  margin-left: 8px;
+}
+
+.snackbar-success {
+  background: #43a047 !important;
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}
+
+.snackbar-cancel {
+  background: #fbc02d !important;
+  color: #333 !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}

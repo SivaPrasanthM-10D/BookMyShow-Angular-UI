@@ -1,0 +1,11 @@
+<div class="payment-container">
+    <h2>Confirm Your Booking</h2>
+  
+    <p><strong>Show ID:</strong> {{ showId }}</p>
+    <p><strong>Selected Seats:</strong> {{ formattedSeats.join(', ') }}</p>
+    <p><strong>Total Price:</strong> ₹{{ totalPrice }}</p>
+  
+    <button mat-raised-button color="primary" (click)="confirmBooking()">
+      Confirm Booking
+    </button>
+</div>  

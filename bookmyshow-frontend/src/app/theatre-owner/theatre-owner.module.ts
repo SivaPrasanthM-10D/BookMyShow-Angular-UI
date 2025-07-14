@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 import { TheatreOwnerRoutingModule } from './theatre-owner-routing.module';
 import { TheatreOwnerComponent } from './theatre-owner.component';
@@ -44,7 +46,9 @@ import { TheatreOwnerDashboardComponent } from './theatre-owner-dashboard/theatr
     MatOptionModule,
     MatSelectModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule,
+    NgxMatTimepickerModule
   ]
 })
 export class TheatreOwnerModule { }

@@ -1,0 +1,139 @@
+/* Styles for the rating dialog will be added here */
+:host {
+    display: block;
+    width: 450px; /* Example width */
+} 
+
+.rating-dialog-container {
+  padding: 0;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+h2[mat-dialog-title] {
+  margin: 0;
+  font-weight: 600;
+}
+
+mat-dialog-content {
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+/* Rating Stars */
+.rating-stars-container {
+  padding: 1rem 0;
+}
+
+.rating-stars-container button {
+  padding: 0;
+  min-width: 36px;
+  margin: 0 2px;
+}
+
+.rating-stars-container mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #d2d2d2;
+  transition: color 0.2s ease-in-out;
+}
+
+.rating-stars-container mat-icon.rated {
+  color: #ffc107;
+}
+
+/* Cleanup old slider styles if they exist */
+.rating-slider-container {
+  display: none;
+}
+
+.rating-label-initial {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.rating-value-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #495057;
+  margin: 1rem 0;
+}
+
+.instruction-text {
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+mat-slider {
+  width: 100%;
+}
+
+.rating-star {
+  color: #ffc107;
+  font-size: 28px;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+/* Hashtags View */
+.final-rating-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.final-rating-display .mat-icon {
+  color: #ffc107;
+  vertical-align: bottom;
+}
+
+.question {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+mat-chip-listbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+mat-chip-option {
+  border-radius: 16px !important;
+  background-color: #e9ecef !important;
+  color: #495057 !important;
+}
+
+mat-chip-option.mat-mdc-chip-selected {
+  background-color: #673ab7 !important;
+  color: white !important;
+}
+
+/* Actions */
+mat-dialog-actions {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #dee2e6;
+}
+.submit-button {
+  width: 100%;
+  padding: 0.8rem 0;
+  font-size: 1.1rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px; /* Give it some space */
+} 

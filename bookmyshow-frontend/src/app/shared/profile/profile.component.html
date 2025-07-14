@@ -1,9 +1,37 @@
-<mat-card *ngIf="user">
+<div class="profile-container">
+  <mat-card *ngIf="user">
     <mat-card-title>Profile Information</mat-card-title>
-    <mat-card-content>
+    <mat-card-content *ngIf="!editMode">
       <p><strong>Username:</strong> {{ user.userName }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
       <p><strong>Phone:</strong> {{ user.phoneNumber }}</p>
       <p><strong>Role:</strong> {{ user.role }}</p>
+      <div class="profile-actions">
+        <button mat-flat-button color="primary" (click)="startEdit()">Edit</button>
+      </div>
     </mat-card-content>
-  </mat-card>  
+
+    <form *ngIf="editMode" (ngSubmit)="saveEdit()" #editForm="ngForm">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="editUser.userName" name="userName" required />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="editUser.email" name="email" required type="email" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="editUser.phoneNumber" name="phoneNumber" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="editUser.password" name="password" type="password" />
+      </mat-form-field>
+      <div class="profile-actions">
+        <button mat-button type="button" (click)="cancelEdit()">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!editForm.form.valid || loading">Save</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

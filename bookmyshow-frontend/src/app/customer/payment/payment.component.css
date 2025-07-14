@@ -1,0 +1,22 @@
+.payment-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .payment-container h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .payment-container p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  button {
+    margin-top: 20px;
+  }  

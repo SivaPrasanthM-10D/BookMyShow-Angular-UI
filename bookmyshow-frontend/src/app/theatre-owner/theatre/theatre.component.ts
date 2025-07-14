@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TheatreService } from 'src/app/services/theatre.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -9,9 +9,11 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./theatre.component.css']
 })
 export class TheatreComponent implements OnInit {
-  theatre: any = null;
+  theatres: any[] = [];
   form: FormGroup;
   showForm: boolean = false;
+  editingTheatreId: string | null = null;
+  editForm: FormGroup;
 
   constructor(
     private theatreService: TheatreService,
@@ -19,28 +21,40 @@ export class TheatreComponent implements OnInit {
     private tokenService: TokenService
   ) {
     this.form = this.fb.group({
-      theatreName: [''],
-      street: [''],
-      city: ['']
+      theatreName: ['', Validators.required],
+      street: ['', Validators.required],
+      city: ['', Validators.required]
+    });
+
+    this.editForm = this.fb.group({
+      theatreName: ['', Validators.required],
+      street: ['', Validators.required],
+      city: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.loadTheatre();
+    this.loadTheatres();
   }
 
-  loadTheatre(): void {
+  loadTheatres(): void {
     const id = this.tokenService.getUserId();
-    this.theatreService.getTheatre(id!).subscribe({
+    this.theatreService.getTheatresByOwner(id!).subscribe({
       next: (res: any) => {
-        this.theatre = res ?? null;
-        if (this.theatre) {
-          this.showForm = false; // hide form if theatre already exists
+        const responseData = res.data ?? res;
+        const theatreData = responseData?.theatres;
+
+        if (Array.isArray(theatreData)) {
+          this.theatres = theatreData;
+        } else if (theatreData) {
+          this.theatres = [theatreData];
+        } else {
+          this.theatres = [];
         }
       },
       error: (err) => {
-        console.error('Error fetching theatre:', err);
-        this.theatre = null;
+        console.error('Error fetching theatres:', err);
+        this.theatres = [];
       }
     });
   }
@@ -52,7 +66,8 @@ export class TheatreComponent implements OnInit {
         next: () => {
           alert('Theatre added!');
           this.form.reset();
-          this.loadTheatre(); // reload and hide form
+          this.showForm = false;
+          this.loadTheatres();
         },
         error: (err) => {
           console.error('Error adding theatre:', err);
@@ -62,13 +77,11 @@ export class TheatreComponent implements OnInit {
     }
   }
 
-  deleteTheatre(): void {
-    const id = this.tokenService.getUserId();
-    this.theatreService.deleteTheatre(id!).subscribe({
+  deleteTheatre(theatreId: string): void {
+    this.theatreService.deleteTheatre(theatreId).subscribe({
       next: () => {
-        alert('🗑 Theatre deleted!');
-        this.theatre = null;
-        this.showForm = false;
+        alert('Theatre deleted!');
+        this.loadTheatres();
       },
       error: (err) => {
         console.error('Error deleting theatre:', err);
@@ -79,5 +92,44 @@ export class TheatreComponent implements OnInit {
 
   toggleForm(): void {
     this.showForm = !this.showForm;
+  }
+
+  editTheatre(theatre: any): void {
+    this.editingTheatreId = theatre.theatreId;
+    this.editForm.patchValue({
+      theatreName: theatre.theatreName,
+      street: theatre.street,
+      city: theatre.city
+    });
+  }
+
+  saveEdit(): void {
+    if (this.editForm.valid && this.editingTheatreId) {
+      const updatedTheatre = {
+        ...this.editForm.value,
+        theatreId: this.editingTheatreId
+      };
+
+      this.theatreService.updateTheatre(this.editingTheatreId, this.editForm.value).subscribe({
+        next: () => {
+          alert('Theatre updated successfully!');
+          this.cancelEdit();
+          this.loadTheatres();
+        },
+        error: (err: any) => {
+          console.error('Error updating theatre:', err);
+          alert('Failed to update theatre.');
+        }
+      });
+    }
+  }
+
+  cancelEdit(): void {
+    this.editingTheatreId = null;
+    this.editForm.reset();
+  }
+
+  isEditing(theatreId: string): boolean {
+    return this.editingTheatreId === theatreId;
   }
 }

@@ -5,4 +5,5 @@ export interface Movie {
     duration: number;
     rating: number;
     adminId: string;
-  }  
+    posterUrl?: string;
+}  

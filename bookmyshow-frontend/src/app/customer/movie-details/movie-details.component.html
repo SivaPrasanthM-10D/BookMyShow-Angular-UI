@@ -1,23 +1,74 @@
 <div class="movie-detail-container" *ngIf="movie">
   <mat-card>
-    <mat-card-title>{{ movie.title }}</mat-card-title>
-    <mat-card-content>
-      <p><strong>Genre:</strong> {{ movie.genre }}</p>
-      <p><strong>Duration:</strong> {{ movie.duration }} mins</p>
-      <p><strong>Rating:</strong> {{ movie.rating }} / 5</p>
-    </mat-card-content>
-  </mat-card>
-
-  <h3 style="margin-top: 1.5rem;">Select Theatre & Showtime</h3>
-
-  <mat-card *ngFor="let theatre of theatres" class="theatre-block">
-    <mat-card-title>{{ theatre.theatreName }}</mat-card-title>
-    <mat-card-content>
-      <div class="showtimes">
-        <button mat-raised-button color="primary" *ngFor="let show of theatre.shows" (click)="proceedToSeatSelection(show)">
-          {{ show.showDate }} | {{ show.showTime }}
-        </button>
+    <mat-card-header>
+      <mat-card-title class="details-movie-title">{{ movie.title }}</mat-card-title>
+    </mat-card-header>
+    <img *ngIf="movie.posterUrl" [src]="getPosterUrl(movie.posterUrl)" alt="{{ movie.title }} poster" class="movie-poster" />
+    <mat-card-content class="details-card-content">
+      
+      <div class="info-chips">
+        <div class="chip">
+          <mat-icon>movie</mat-icon>
+          <span>{{ movie.genre }}</span>
+        </div>
+        <div class="chip">
+          <mat-icon>timer</mat-icon>
+          <span>{{ movie.duration }} mins</span>
+        </div>
       </div>
+      
+      <div class="rating-summary-container">
+        <div class="rating-badge">
+          <mat-icon class="rating-star">star</mat-icon>
+          <span class="rating-value">{{ averageRating | number:'1.1-1' }}</span>
+          <span class="rating-base">/ 10</span>
+          <span class="review-count">({{ reviews.length }} review{{ reviews.length !== 1 ? 's' : '' }})</span>
+        </div>
+        <!-- <button mat-stroked-button color="primary" [routerLink]="['/customer/movie', movie.movieId, 'reviews']">View/Add Reviews</button> -->
+      </div>
+
     </mat-card-content>
   </mat-card>
+
+  <!-- Top Reviews Section -->
+  <div class="top-reviews-section" *ngIf="topReviews.length > 0">
+    <div class="reviews-header">
+      <h2>Top reviews</h2>
+      <a class="all-reviews-link" [routerLink]="['/customer/movie', movie.movieId, 'reviews']">
+        {{ reviews.length }} reviews >
+      </a>
+    </div>
+    <div class="reviews-grid">
+      <mat-card *ngFor="let review of topReviews" class="review-card">
+        <mat-card-header>
+          <div mat-card-avatar class="review-avatar"><mat-icon>person</mat-icon></div>
+          <mat-card-title>{{ userName }}</mat-card-title>
+          <mat-card-subtitle>Booked on BookMyShow</mat-card-subtitle>
+          <div class="review-rating">
+            <mat-icon>star</mat-icon> {{ review.rating }}/10
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ review.review }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="theatres.length > 0; else noShows">
+    <h3 style="margin-top: 1.5rem;">Select Theatre & Showtime</h3>
+    <mat-card *ngFor="let theatre of theatres" class="theatre-block">
+      <mat-card-title>{{ theatre.theatreName }}</mat-card-title>
+      <mat-card-content>
+        <div class="showtimes">
+          <button mat-raised-button color="primary" *ngFor="let show of theatre.shows" (click)="proceedToSeatSelection(show)">
+            {{ show.showDate }} | {{ show.showTime }}
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <ng-template #noShows>
+    <h3 style="margin-top: 1.5rem; color: #b71c1c;">No shows available for this movie.</h3>
+  </ng-template>
 </div>

@@ -9,18 +9,20 @@ export class TheatreService {
 
   constructor(private http: HttpClient) {}
 
-  getTheatre(ownerId: string): Observable<any> {
+  getTheatresByOwner(ownerId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${ownerId}`);
   }
 
   addTheatre(ownerId: string, data: any): Observable<any> {
-    console.log('ownerId:', ownerId);
-
     return this.http.post(`${this.baseUrl}/${ownerId}`, data);
   }
 
-  deleteTheatre(ownerId: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${ownerId}`);
+  updateTheatre(theatreId: string, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${theatreId}`, data);
+  }
+
+  deleteTheatre(theatreId: string): Observable<any> {
+    return this.http.delete(`https://localhost:44374/api/TheatreManagement/Theatre/${theatreId}`);
   }
 
   getScreens(theatreId: string): Observable<any> {

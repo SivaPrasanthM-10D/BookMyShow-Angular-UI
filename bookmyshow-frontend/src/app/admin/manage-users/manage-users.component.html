@@ -1,0 +1,38 @@
+<div class="manage-users-container">
+  <h2>Manage Users <span *ngIf="selectedRole">- {{ selectedRole }}</span></h2>
+
+  <div *ngIf="loading">Loading users...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="!loading && !error && filteredUsers.length" class="users-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Phone</th>
+        <th>Password</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers; let i = index"
+          class="clickable-row"
+          (click)="showUserDetails(user)">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.phoneNumber }}</td>
+        <td>••••••••</td>
+        <td>
+          <button mat-icon-button color="primary" title="Edit" (click)="editUser(user); $event.stopPropagation();"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" title="Delete" (click)="deleteUser(user); $event.stopPropagation();"><mat-icon>delete</mat-icon></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !error && !filteredUsers.length">No users found.</div>
+</div>

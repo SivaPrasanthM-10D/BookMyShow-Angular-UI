@@ -1,0 +1,25 @@
+<div class="note-dialog-container">
+  <h2 class="note-title">Note</h2>
+  <button mat-icon-button class="close-btn" (click)="onCancel()" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="note-content">
+    <p class="note-warning"><b>"Screens are subject to change for any technical issue caused".</b></p>
+    <ol>
+      <li>Outside Food and Beverage is not allowed inside the cinema premises.</li>
+      <li>Ticket required for children 3 years and above.</li>
+      <li>Tickets for A rated movie should not be purchased for people under 18 years of age. There won't be a refund for tickets booked in such cases.</li>
+      <li>Tickets once purchased cannot be exchanged or adjusted/transferred for any other show.</li>
+      <li>Smoking is strictly not permitted inside the cinema premises. Cigarettes/lighters/matchsticks/Gutkha/Pan masala etc. will not be allowed.</li>
+      <li>People under the influence of Alcohol/Drugs will not be allowed inside the cinema premises.</li>
+      <li>For 3D movies, ticket price includes charges towards usage of 3D glasses.</li>
+      <li>Entry not allowed after 45 minutes from show start.</li>
+      <li>Please do not sit in a different seat. Use the seat number on your ticket.</li>
+      <li>Cinema reserves the Right of Admission.</li>
+    </ol>
+  </div>
+  <div class="note-actions">
+    <button mat-stroked-button color="warn" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="accent" (click)="onOk()">OK</button>
+  </div>
+</div> 

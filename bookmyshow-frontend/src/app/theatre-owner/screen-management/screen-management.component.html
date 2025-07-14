@@ -1,27 +1,57 @@
 <div class="container">
-  <h2 class="mat-headline">Manage Screens</h2>
+  <div class="header">
+    <h1>Screen Management</h1>
+  </div>
 
-  <form [formGroup]="screenForm" (ngSubmit)="addScreen()" class="screen-form">
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Screen Number</mat-label>
-      <input matInput type="number" formControlName="screenNumber" required />
-    </mat-form-field>
+  <mat-form-field appearance="outline" class="theatre-select">
+    <mat-label>Select a Theatre to Manage Screens</mat-label>
+    <mat-select (selectionChange)="onTheatreSelect($event.value)" [value]="selectedTheatreId" required>
+      <mat-option *ngFor="let theatre of theatres" [value]="theatre.theatreId">
+        {{ theatre.theatreName }} ({{ theatre.street }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Add Screen</button>
-  </form>
+  <div *ngIf="theatres.length === 0" class="no-theatres-message">
+    <mat-icon>info</mat-icon>
+    <p>No theatres found.</p>
+    <a mat-stroked-button routerLink="/theatre-owner/theatre">Add a Theatre</a>
+  </div>
 
-  <mat-divider class="my-3"></mat-divider>
+  <div *ngIf="selectedTheatreId" class="management-area">
+    <mat-card class="add-screen-card">
+      <mat-card-title>Add a New Screen</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="screenForm" (ngSubmit)="addScreen()" class="add-screen-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Screen Number</mat-label>
+            <input matInput type="number" formControlName="screenNumber" placeholder="e.g., 1" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="screenForm.invalid">
+            Add Screen
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
 
-  <div *ngIf="screens.length > 0">
-    <mat-list>
-      <mat-list-item *ngFor="let screen of screens">
-        <div class="screen-info">
-          Screen {{ screen.screenNumber }}
-        </div>
-        <button mat-icon-button color="warn" (click)="deleteScreen(screen.screenId)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
+    <mat-card class="screen-list-card">
+      <mat-card-title>Screens for {{ selectedTheatreName }}</mat-card-title>
+      <mat-card-content>
+        <mat-list *ngIf="screens.length > 0; else noScreens">
+          <mat-list-item *ngFor="let screen of screens">
+            <div class="screen-row" mat-line>
+              <mat-icon class="screen-icon">desktop_mac</mat-icon>
+              <span>Screen {{ screen.screenNumber }}</span>
+              <button mat-icon-button color="warn" (click)="deleteScreen(screen.screenId)" title="Delete Screen">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <ng-template #noScreens>
+          <p class="no-screens-message">This theatre has no screens yet.</p>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

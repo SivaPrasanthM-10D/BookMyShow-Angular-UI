@@ -1,5 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Global styles for movie rating badge */
+.rating-summary-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fce4ec; /* Light pink background */
+  color: #880e4f; /* Dark pink text */
+  padding: 8px 16px;
+  border-radius: 20px; /* Pill shape */
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.rating-badge .rating-star {
+  color: #f44336; /* Red star */
+}
+
+.rating-badge .rating-value {
+  font-weight: bold;
+  color: #000;
+}
+
+.rating-badge .rating-base,
+.rating-badge .review-count {
+  color: #666;
+  font-size: 1rem;
+}
+
 html, body { height: 100%; }
 body {
     margin: 0;
@@ -9,3 +44,105 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --primary-bg: #f4f6f8;
+  --primary-text: #222;
+  --toolbar-bg: #6c4ee6;
+  --card-bg: #fff;
+  --accent: #ff4081;
+  --container-bg: #fff;
+  --border-color: #e0e0e0;
+  --font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --logo-filter: none;
+}
+
+body.dark-theme {
+  --primary-bg: #181a1b;
+  --primary-text: #f4f6f8;
+  --toolbar-bg: #23272f;
+  --card-bg: #23272f;
+  --accent: #ff4081;
+  --container-bg: #23272f;
+  --border-color: #333;
+  --font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --logo-filter: brightness(0) invert(1);
+}
+
+body, .content, h1, h2, h3, h4, h5, h6, p, label, span, .mat-button, .mat-raised-button, .mat-stroked-button, .mat-flat-button, .mat-card-title, .mat-card-content, .mat-dialog-title, .mat-dialog-content, .mat-dialog-actions {
+  color: var(--primary-text) !important;
+}
+
+mat-toolbar {
+  background: var(--toolbar-bg) !important;
+  color: var(--primary-text) !important;
+  font-family: var(--font-family) !important;
+}
+
+mat-card, .movie-card, .homepage-card, .dashboard-card, .container, .mat-dialog-container, .seat-container, .note-dialog-container {
+  background: var(--container-bg) !important;
+  color: var(--primary-text) !important;
+  border-color: var(--border-color) !important;
+  font-family: var(--font-family) !important;
+}
+
+h1, h2, h3, h4, h5, h6, .logo, .note-title {
+  color: var(--primary-text) !important;
+  font-family: var(--font-family) !important;
+}
+
+.navbar-logo {
+  height: 36px;
+  width: 36px;
+  margin-right: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  filter: var(--logo-filter);
+}
+
+/* Add more overrides as needed for buttons, dialogs, etc. */
+
+mat-icon, .mat-icon {
+  color: var(--primary-text) !important;
+  transition: color 0.2s;
+}
+
+/* Custom image icon styles for theme support */
+.movie-poster, .vehicle-image, .custom-icon-img {
+  background: transparent;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: filter 0.2s, box-shadow 0.2s;
+  filter: none;
+}
+body.dark-theme .movie-poster,
+body.dark-theme .vehicle-image,
+body.dark-theme .custom-icon-img {
+  filter: brightness(0.85) contrast(1.1) drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+/* Button and link hover/active/focus states for theme */
+button:hover, button:focus, button:active,
+.mat-button:hover, .mat-button:focus, .mat-button:active,
+.mat-raised-button:hover, .mat-raised-button:focus, .mat-raised-button:active,
+.mat-stroked-button:hover, .mat-stroked-button:focus, .mat-stroked-button:active,
+.mat-flat-button:hover, .mat-flat-button:focus, .mat-flat-button:active,
+.mat-icon-button:hover, .mat-icon-button:focus, .mat-icon-button:active,
+a:hover, a:focus, a:active,
+.mat-button-base:hover, .mat-button-base:focus, .mat-button-base:active {
+  background: var(--toolbar-bg, #6c4ee6) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-color: var(--toolbar-bg, #6c4ee6) !important;
+}
+
+/* Navbar hover styles (light theme only) */
+body:not(.dark-theme) mat-toolbar .mat-button:hover, body:not(.dark-theme) mat-toolbar .mat-icon-button:hover {
+  background: #fff !important;
+  color: var(--toolbar-bg, #6c4ee6) !important;
+}
+body:not(.dark-theme) mat-toolbar .mat-button:hover mat-icon, body:not(.dark-theme) mat-toolbar .mat-icon-button:hover mat-icon {
+  color: var(--toolbar-bg, #6c4ee6) !important;
+}
+
+/* No additional override needed for .search-icon since it uses var(--toolbar-bg) which adapts to theme. */

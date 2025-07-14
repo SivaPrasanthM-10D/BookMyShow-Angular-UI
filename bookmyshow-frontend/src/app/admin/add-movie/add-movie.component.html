@@ -1,5 +1,5 @@
 <mat-card>
-  <h2>{{ editing ? 'Edit Movie' : 'Add New Movie' }}</h2>
+  <h2>Add New Movie</h2>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill" class="full-width">
@@ -16,15 +16,20 @@
       <mat-label>Duration (minutes)</mat-label>
       <input matInput type="number" formControlName="duration" />
     </mat-form-field>
-
+<!-- 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Rating</mat-label>
       <input matInput type="number" formControlName="rating" />
-    </mat-form-field>
+    </mat-form-field> -->
+
+    <div class="full-width" style="margin-bottom: 1rem;">
+      <label for="poster">Poster</label><br>
+      <input id="poster" type="file" (change)="onFileSelected($event)" accept="image/*" />
+    </div>
 
     <div class="button-row">
       <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">
-        {{ editing ? 'Update Movie' : 'Save Movie' }}
+        Save Movie
       </button>
       <button mat-button color="warn" type="button" routerLink="/admin/movies">
         Cancel

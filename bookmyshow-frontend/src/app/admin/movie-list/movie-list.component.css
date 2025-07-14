@@ -1,32 +1,58 @@
 mat-card {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 24px;
+  max-width: 300px;
+  margin: 20px;
+  padding: 16px;
   border-radius: 8px;
 }
 
-mat-card h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-weight: 500;
-  color: #3f51b5;
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
-.full-width {
+.movie-poster {
   width: 100%;
-  margin-bottom: 20px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 16px;
 }
 
-.button-row {
+.admin-header {
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
+  align-items: center;
+  padding: 20px;
+}
+
+mat-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+
+mat-card-content p {
+  margin: 8px 0;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
 }
 
 @media (max-width: 600px) {
-  .button-row {
-    flex-direction: column;
-    gap: 12px;
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  mat-card {
+    max-width: 100%;
+    margin: 10px 0;
+  }
+  
+  .movie-poster {
+    height: 300px;
   }
 }

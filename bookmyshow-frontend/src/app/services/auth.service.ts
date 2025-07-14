@@ -34,4 +34,16 @@ export class AuthService {
   getMyProfile(userId: any) {
     return this.http.get(`https://localhost:44374/api/user/${userId}`);
   }  
+
+  getAllUsers(): Observable<any> {
+    return this.http.get('https://localhost:44374/api/user');
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete(`https://localhost:44374/api/user/${userId}`);
+  }
+
+  updateUser(userId: string, data: any): Observable<any> {
+    return this.http.put(`https://localhost:44374/api/user/${userId}`, data);
+  }
 }

@@ -13,7 +13,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MoviesComponent } from './movies/movies.component';
-import { BookingsComponent } from './bookings/bookings.component';
 import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
@@ -27,17 +26,22 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SignupComponent } from './signup/signup.component';
 import { CustomerHomeComponent } from './customer/customer-home/customer-home.component';
 import { ProfileComponent } from './shared/profile/profile.component';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
-    BookingsComponent,
     LoginComponent,
     LayoutComponent,
     SignupComponent,
     CustomerHomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -56,13 +60,21 @@ import { ProfileComponent } from './shared/profile/profile.component';
     FormsModule,
     MatNativeDateModule,
     MatOptionModule,
-    MatRadioModule
+    MatRadioModule,
+    NgxMatTimepickerModule.setLocale('en-US'),
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     MatDatepickerModule,
     MatNativeDateModule,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

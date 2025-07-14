@@ -1,0 +1,16 @@
+.user-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+.user-details-table th {
+  text-align: left;
+  padding: 8px 12px;
+  background: #f5f7ff;
+  width: 140px;
+  font-weight: 600;
+}
+.user-details-table td {
+  padding: 8px 12px;
+  background: #fff;
+}

@@ -1,9 +1,30 @@
-<h2>Welcome, {{ userName }}!</h2>
+<!-- Show welcome card only if NOT logged in -->
+<div class="homepage-container" *ngIf="!role">
+  <mat-card class="homepage-card mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title class="homepage-title">Welcome to BookMyShow</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="homepage-subtitle">
+        Book your favorite movies, manage shows, and explore theatres with ease!
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button align="center" mat-raised-button color="primary" routerLink="/signup">Get Started</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
 
-<mat-card class="card">
-  <mat-card-title>My Bookings</mat-card-title>
-  <mat-card-content>
-    <p>You have made {{ bookingsCount }} bookings.</p>
-    <button mat-stroked-button color="primary" routerLink="/customer/bookings">View Bookings</button>
-  </mat-card-content>
-</mat-card>
+<!-- Show bookings card if logged in -->
+<div *ngIf="role">
+  <h2>Welcome, {{ userName }}!</h2>
+  <mat-card class="card">
+    <mat-card-title>My Bookings</mat-card-title>
+    <mat-card-content>
+      <p>You have made {{ bookingsCount }} bookings.</p>
+      <ng-container *ngIf="bookingsCount > 0">
+        <button mat-stroked-button color="primary" routerLink="/customer/bookings">View Bookings</button>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>

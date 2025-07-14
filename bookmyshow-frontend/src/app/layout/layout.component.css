@@ -10,3 +10,21 @@
   font-weight: bold;
   font-size: 20px;
 }
+
+.navbar-logo {
+  height: 36px;
+  width: 36px;
+  margin-right: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  /* filter: brightness(0) invert(1); */
+}
+
+/* Navbar hover override for layout-specific styles */
+:host ::ng-deep mat-toolbar .mat-button:hover, :host ::ng-deep mat-toolbar .mat-icon-button:hover {
+  background: #fff !important;
+  color: var(--toolbar-bg, #6c4ee6) !important;
+}
+:host ::ng-deep mat-toolbar .mat-button:hover mat-icon, :host ::ng-deep mat-toolbar .mat-icon-button:hover mat-icon {
+  color: var(--toolbar-bg, #6c4ee6) !important;
+}

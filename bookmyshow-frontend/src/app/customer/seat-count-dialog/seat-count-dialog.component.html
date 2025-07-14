@@ -1,0 +1,30 @@
+<div class="dialog-container">
+    <h2>How Many Seats?</h2>
+    <div class="dialog-image">
+      <img [src]="vehicleImage.src" [alt]="vehicleImage.alt" width="80" height="80"
+           [ngStyle]="{'opacity': vehicleImage.isPlaceholder ? 0.4 : 1, 'transition': 'opacity 0.2s'}" />
+    </div>
+    <div class="seat-options">
+      <button *ngFor="let count of seatOptions"
+              [ngClass]="{selected: seatCount !== null && seatCount === count}"
+              (click)="selectSeatCount(count)"
+              (mouseenter)="hoveredCount = count"
+              (mouseleave)="hoveredCount = null">
+        {{ count }}
+      </button>
+    </div>
+    <hr />
+    <div class="pricing-info">
+      <div class="pricing-block">
+        <div class="class">FIRST CLASS</div>
+        <div class="price">₹{{ data.ticketPrice }}</div>
+        <div class="status available">Available</div>
+      </div>
+      <div class="pricing-block">
+        <div class="class">SECOND CLASS</div>
+        <div class="price">₹60</div>
+        <div class="status fast">Filling Fast</div>
+      </div>
+    </div>
+    <button class="select-btn" mat-raised-button color="accent" (click)="confirm()" [disabled]="!seatCount">Select Seats</button>
+  </div> 

@@ -5,14 +5,30 @@
         <h1>{{ totalMovies }}</h1>
       </mat-card-content>
     </mat-card>
+
+    <div class="roles-summary">
+      <mat-card *ngFor="let role of rolesList" class="role-card" (click)="goToUsersByRole(role)">
+        <mat-card-title>{{ role }}</mat-card-title>
+        <mat-card-content>
+          <h2>{{ rolesCount[role] }}</h2>
+          <span>Users</span>
+        </mat-card-content>
+      </mat-card>
+    </div>
   
     <mat-card class="top-movies-card">
       <mat-card-title>Top Rated Movies</mat-card-title>
       <mat-list>
-        <mat-list-item *ngFor="let movie of topRatedMovies">
-          <div class="movie-title">{{ movie.title }}</div>
-          <span class="rating">⭐ {{ movie.rating }}</span>
+        <mat-list-item *ngFor="let movie of topRatedMovies; let i = index" class="movie-item">
+          <div class="movie-list-row">
+            <div class="movie-rank">{{ i + 1 }}.</div>
+            <div class="movie-title">{{ movie.title }}</div>
+            <span class="movie-rating">
+              <mat-icon>star</mat-icon>
+              {{ movie.averageRating | number:'1.1-1' }} / 10
+            </span>
+          </div>
         </mat-list-item>
       </mat-list>
     </mat-card>
-  </div>  
+</div>

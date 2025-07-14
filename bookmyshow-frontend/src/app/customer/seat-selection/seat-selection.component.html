@@ -1,24 +1,67 @@
 <div class="seat-container">
-    <h2>Select Your Seats</h2>
-  
-    <div class="seats-grid">
-      <button
-        mat-button
-        *ngFor="let seat of availableSeats"
-        [ngClass]="{ selected: selectedSeats.includes(seat) }"
-        (click)="toggleSeat(seat)"
-      >
-        {{ seat }}
-      </button>
-    </div>
-  
-    <div class="summary">
-      <p>Selected Seats: {{ selectedSeats.join(', ') || 'None' }}</p>
-      <p>Total Price: ₹{{ totalPrice }}</p>
-  
-      <button mat-raised-button color="primary" (click)="proceedToPayment()" [disabled]="selectedSeats.length === 0">
-        Proceed to Payment
-      </button>
-    </div>
+  <div class="edit-seat-count-btn-container" *ngIf="seatCountSelected">
+    <button mat-stroked-button color="primary" class="edit-seat-count-btn" (click)="openSeatCountDialog()">
+      <mat-icon>edit</mat-icon>
+      {{ seatCount !== null ? (seatCount + ' Ticket' + (seatCount > 1 ? 's' : '')) : 'Select Seats' }}
+    </button>
   </div>
-  
+  <h2>Select Your Seats</h2>
+
+  <ng-container *ngIf="rows.length > 0; else noSeats">
+    <div class="seat-layout-center">
+      <div class="seat-grid-rows">
+        <ng-container *ngFor="let row of rows; let i = index">
+          <div *ngIf="getRowGroupLabel(i)" class="row-group-label">
+            {{ getRowGroupLabel(i) }}
+            <span class="class-price">
+              (₹{{ getRowGroupLabel(i) === 'SECOND CLASS' ? 60 : ticketPrice }})
+            </span>
+          </div>
+          <div class="row">
+            <div class="row-label">{{ row.label }}</div>
+            <div class="row-seats">
+              <ng-container *ngFor="let seat of row.seats; let j = index">
+                <button
+                  mat-raised-button
+                  [ngClass]="{
+                    selected: selectedSeats.includes(seat.actualNumber),
+                    booked: seat.isBooked
+                  }"
+                  [disabled]="seat.isBooked"
+                  (click)="toggleSeat(seat.actualNumber)">
+                  {{ seat.uiNumber }}
+                </button>
+                <span *ngIf="seat.isAisle" class="aisle-gap"></span>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="screen-this-way">
+        <span class="screen-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="260" height="20" viewBox="0 0 260 20" fill="rgba(0, 0, 0, 0.6)">
+            <path d="M0,0 Q130,30 260,0" stroke="rgba(0, 0, 0, 0.6)" stroke-width="2" fill="none" />
+          </svg>
+        </span>
+        <span class="screen-text">All eyes this way please!</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noSeats>
+    <p>No seats available for this show.</p>
+  </ng-template>
+
+  <div class="summary">
+    <p><strong>Selected Seats:</strong> {{ selectedSeatLabels.join(', ') || 'None' }}</p>
+    <p><strong>Total Price:</strong> ₹{{ totalPrice }}</p>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="proceedToPayment()"
+      [disabled]="selectedSeats.length === 0">
+      Proceed to Payment
+    </button>
+  </div>
+</div>

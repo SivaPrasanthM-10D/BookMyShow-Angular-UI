@@ -4,6 +4,16 @@
   padding: 1rem;
 }
 
+.movie-poster {
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 20px auto;
+  display: block;
+}
+
 .theatre-block {
   margin-top: 1rem;
   padding: 1rem;
@@ -14,4 +24,136 @@
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 0.5rem;
+}
+
+mat-card-content {
+  margin-top: 16px;
+}
+
+mat-card-content p {
+  margin: 12px 0;
+  font-size: 1.1rem;
+}
+
+.rating-summary-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fce4ec; /* Light pink background */
+  color: #880e4f; /* Dark pink text */
+  padding: 8px 16px;
+  border-radius: 20px; /* Pill shape */
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.rating-badge .rating-star {
+  color: #f44336; /* Red star */
+}
+
+.rating-badge .rating-value {
+  font-weight: bold;
+  color: #000;
+}
+
+.rating-badge .rating-base,
+.rating-badge .review-count {
+  color: #666;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .movie-poster {
+    height: 400px;
+  }
+}
+
+.details-movie-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.details-card-content {
+  padding-top: 1rem;
+}
+
+.info-chips {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  font-size: 0.95rem;
+}
+
+.top-reviews-section {
+  margin-top: 2rem;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reviews-header h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.all-reviews-link {
+  color: #f44336;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  padding: 1rem;
+}
+
+.review-card .mat-mdc-card-header {
+  padding: 0;
+}
+
+.review-avatar {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+}
+
+.review-rating {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #f44336;
+  font-weight: bold;
+}
+
+.review-card mat-card-content {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }

@@ -5,6 +5,46 @@
     padding: 20px;
 }
 
+.roles-summary {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.role-card {
+    flex: 1 1 180px;
+    min-width: 180px;
+    max-width: 220px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 2px solid #e0e0e0;
+}
+
+.role-card:hover {
+    box-shadow: 0 4px 16px rgba(63,81,181,0.13);
+    border-color: #3f51b5;
+    transform: translateY(-2px) scale(1.03);
+}
+
+.role-card mat-card-title {
+    font-size: 1.1rem;
+    color: #3f51b5;
+    margin-bottom: 8px;
+}
+
+.role-card mat-card-content h2 {
+    font-size: 2.2rem;
+    margin: 0 0 4px 0;
+    color: #222;
+}
+
+.role-card mat-card-content span {
+    color: #888;
+    font-size: 1rem;
+}
+
 .stat-card,
 .top-movies-card {
     padding: 10px;
@@ -16,16 +56,72 @@
 }
 
 mat-list-item {
+    padding: 0;
+    border-bottom: 1px solid #eee;
+    background: transparent;
+}
+
+mat-list-item:last-child {
+    border-bottom: none;
+}
+
+.movie-list-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 10px 0 10px 8px;
+    box-sizing: border-box;
+}
+
+.movie-rank {
+    width: 2.5em;
+    min-width: 2.5em;
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #3f51b5;
+    margin-right: 12px;
+    flex-shrink: 0;
 }
 
 .movie-title {
     font-weight: 500;
+    flex: 1 1 0;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .rating {
     color: #fbc02d;
     font-weight: bold;
+    font-size: 1.1rem;
+    margin-left: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+    justify-content: flex-end;
+}
+
+.rating-value {
+    display: inline-block;
+    width: 2.2em;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.rating .material-icons,
+.rating mat-icon {
+    font-size: 1.2em;
+    vertical-align: middle;
+    margin: 0 2px 0 2px;
+}
+
+mat-list-item:first-child .movie-list-row {
+    background: #f5f7ff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(63,81,181,0.07);
 }

@@ -9,6 +9,8 @@ import { SeatSelectionComponent } from './seat-selection/seat-selection.componen
 import { AuthGuard } from '../guards/auth.guard';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ProfileComponent } from '../shared/profile/profile.component';
+import { PaymentComponent } from './payment/payment.component';
+import { MovieReviewsComponent } from './movie-reviews/movie-reviews.component';
 
 const routes: Routes = [
   {
@@ -26,7 +28,9 @@ const routes: Routes = [
       },
       { path: 'movie/:id', component: MovieDetailComponent },
       { path: 'select-seats/:showId', component: SeatSelectionComponent },
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'payment', component: PaymentComponent },
+      { path: 'movie/:id/reviews', component: MovieReviewsComponent }
     ]
   }
 ];

@@ -5,11 +5,12 @@
   
   <div class="movie-grid">
     <mat-card *ngFor="let movie of movies" class="movie-card">
+      <img *ngIf="movie.posterUrl" [src]="getPosterUrl(movie.posterUrl)" alt="{{ movie.title }} poster" class="movie-poster" />
       <mat-card-title>{{ movie.title }}</mat-card-title>
       <mat-card-content>
         <p>Genre: {{ movie.genre }}</p>
         <p>Duration: {{ movie.duration }} mins</p>
-        <p>Rating: {{ movie.rating }}</p>
+        <p>Rating: {{ movie.rating }} / 5</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-button color="accent" (click)="editMovie(movie.movieId)">Edit</button>

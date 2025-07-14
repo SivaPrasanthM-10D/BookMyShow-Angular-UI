@@ -1,0 +1,94 @@
+:host {
+  display: block;
+  background-color: #f4f7fa;
+  padding: 24px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 2.2em;
+  color: #2c3e50;
+  font-weight: 300;
+}
+
+.theatre-select {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.no-theatres-message {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  color: #7f8c8d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.no-theatres-message mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+.management-area {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+}
+
+.add-screen-card, .screen-list-card {
+  border-radius: 8px;
+}
+
+.add-screen-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.no-screens-message {
+  color: #7f8c8d;
+  padding-top: 16px;
+}
+
+.screen-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 16px;
+}
+
+.screen-icon {
+  font-size: 24px;
+  color: #555;
+  margin-right: 8px;
+}
+
+.screen-row span {
+  font-size: 1.1em;
+  flex: 1;
+}
+
+.screen-row button {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .management-area {
+    grid-template-columns: 1fr;
+  }
+}

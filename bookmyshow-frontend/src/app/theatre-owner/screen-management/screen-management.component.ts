@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TheatreService } from 'src/app/services/theatre.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -10,8 +10,9 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class ScreenManagementComponent implements OnInit {
   screenForm: FormGroup;
+  theatres: any[] = [];
   screens: any[] = [];
-  theatreId!: string;
+  selectedTheatreId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -19,41 +20,66 @@ export class ScreenManagementComponent implements OnInit {
     private tokenService: TokenService
   ) {
     this.screenForm = this.fb.group({
-      screenNumber: ['']
+      screenNumber: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.fetchTheatreAndScreens();
+    this.loadTheatres();
   }
 
-  fetchTheatreAndScreens() {
+  loadTheatres(): void {
     const ownerId = this.tokenService.getUserId();
-    this.theatreService.getTheatre(ownerId!).subscribe((res: any) => {
-      this.theatreId = res.theatre.theatreId;
-      this.getScreens();
+    this.theatreService.getTheatresByOwner(ownerId!).subscribe({
+      next: (res: any) => {
+        const ownerData = res.data ?? res;
+        const theatreData = ownerData?.theatres;
+        this.theatres = Array.isArray(theatreData) ? theatreData : (theatreData ? [theatreData] : []);
+        if (this.theatres.length > 0) {
+          this.onTheatreSelect(this.theatres[0].theatreId);
+        }
+      },
+      error: (err: any) => console.error('Error loading theatres:', err)
     });
   }
 
-  getScreens() {
-    this.theatreService.getScreens(this.theatreId).subscribe((res: any) => {
-      this.screens = res;
+  get selectedTheatreName(): string {
+    if (!this.selectedTheatreId) return '';
+    const theatre = this.theatres.find(t => t.theatreId === this.selectedTheatreId);
+    return theatre ? theatre.theatreName : '';
+  }
+
+  onTheatreSelect(theatreId: string): void {
+    this.selectedTheatreId = theatreId;
+    this.screens = [];
+    if (theatreId) {
+      this.loadScreens();
+    }
+  }
+
+  loadScreens(): void {
+    if (!this.selectedTheatreId) return;
+    this.theatreService.getScreens(this.selectedTheatreId).subscribe({
+      next: (res: any) => {
+        this.screens = res.data ?? res;
+      },
+      error: (err: any) => console.error('Error loading screens:', err)
     });
   }
 
-  addScreen() {
-    if (this.screenForm.invalid) return;
+  addScreen(): void {
+    if (this.screenForm.invalid || !this.selectedTheatreId) return;
   
     const screenData = {
-      theatreId: this.theatreId,
+      theatreId: this.selectedTheatreId,
       screenNumber: this.screenForm.value.screenNumber
     };
   
     this.theatreService.addScreen(screenData).subscribe({
-      next: (res) => {
+      next: () => {
         alert('Screen added successfully!');
         this.screenForm.reset();
-        this.getScreens();
+        this.loadScreens();
       },
       error: (err) => {
         console.error('Error adding screen:', err);
@@ -66,11 +92,13 @@ export class ScreenManagementComponent implements OnInit {
     });
   }
   
-
-  deleteScreen(id: string) {
-    if (confirm('Delete this screen?')) {
-      this.theatreService.deleteScreen(id).subscribe(() => {
-        this.getScreens();
+  deleteScreen(id: string): void {
+    if (confirm('Are you sure you want to delete this screen?')) {
+      this.theatreService.deleteScreen(id).subscribe({
+        next: () => {
+          this.loadScreens();
+        },
+        error: (err) => console.error('Error deleting screen:', err)
       });
     }
   }

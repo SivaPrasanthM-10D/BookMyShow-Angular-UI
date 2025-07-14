@@ -1,0 +1,51 @@
+<div class="reviews-container">
+  <div class="movie-header">
+    <img *ngIf="posterUrl" [src]="getPosterUrl(posterUrl)" alt="{{movieTitle}} poster" class="movie-poster" />
+    <div class="movie-title">{{ movieTitle }}</div>
+  </div>
+  <div class="reviews-header">
+    <h2>Movie Reviews</h2>
+    <div *ngIf="reviews.length > 0" class="average-rating-badge">
+      <mat-icon color="warn">star</mat-icon>
+      <span>{{ getAverageRating() | number:'1.1-1' }}</span>
+      <span class="out-of">/ 10</span>
+      <span class="review-count">({{ reviews.length }} review{{ reviews.length > 1 ? 's' : '' }})</span>
+    </div>
+    <p class="no-reviews" *ngIf="!reviews.length">No reviews yet.</p>
+  </div>
+
+  <div class="rate-button-container" *ngIf="isCustomer">
+    <button *ngIf="!hasUserReviewed" mat-raised-button color="primary" (click)="openRatingDialog()">
+      <mat-icon>star</mat-icon> Rate Now
+    </button>
+    <div *ngIf="hasUserReviewed" class="reviewed-message">
+      You have already reviewed this movie. Thank you!
+    </div>
+  </div>
+
+  <div class="reviews-list">
+    <mat-card *ngFor="let review of reviews" class="review-card">
+      <mat-card-header>
+        <div class="review-avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="review-content">
+          <div class="review-rating">
+            <mat-icon color="warn">star</mat-icon>
+            <span>{{ review.rating | number:'1.1-1' }} / 10</span>
+          </div>
+          <div class="review-comment">
+            <q>{{ review.review }}</q>
+          </div>
+          <div class="review-user">
+            <small>By: {{ customerName }}</small>
+          </div>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isCustomer" class="login-to-review">
+    Login as a customer to add a review.
+  </div>
+</div>

@@ -1,0 +1,89 @@
+.dialog-container {
+    padding: 24px 18px 18px 18px;
+    text-align: center;
+    min-width: 320px;
+    max-width: 360px;
+  }
+  
+  .dialog-image {
+    margin: 12px 0 18px 0;
+  }
+  
+  .seat-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .seat-options button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    background: #eee;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  
+  .seat-options button.selected {
+    background: var(--toolbar-bg, #6c4ee6);
+    color: #fff;
+    border: 2px solid var(--toolbar-bg, #6c4ee6);
+  }
+  
+  .seat-options button:focus {
+    outline: none;
+    border-color: #6c4ee6;
+  }
+  
+  .seat-options button:hover:not(.selected) {
+    background: #ff4081;
+    border-color: #ff4081;
+    color: #fff;
+  }
+  
+  .pricing-info {
+    display: flex;
+    justify-content: space-around;
+    margin: 16px 0 18px 0;
+  }
+  
+  .pricing-block {
+    text-align: center;
+  }
+  
+  .class {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .price {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 2px 0;
+  }
+  
+  .status {
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+  
+  .status.available {
+    color: #43a047;
+  }
+  
+  .status.fast {
+    color: #ff9800;
+  }
+  
+  .select-btn {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 1px;
+  } 

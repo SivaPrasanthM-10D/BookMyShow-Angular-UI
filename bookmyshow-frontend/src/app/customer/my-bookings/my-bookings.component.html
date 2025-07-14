@@ -1,16 +1,80 @@
-<h2>🎫 My Bookings</h2>
+<h2 class="bookings-title">
+  <mat-icon class="bookings-icon">confirmation_number</mat-icon>
+  My Bookings
+</h2>
 
-<mat-card *ngFor="let ticket of tickets" class="ticket-card">
-  <mat-card-title>{{ ticket.movieName }} — ₹{{ ticket.ticketPrice }}</mat-card-title>
-  <mat-card-subtitle>
-    {{ ticket.theatreName }} | Screen {{ ticket.screenNumber }}
-  </mat-card-subtitle>
-  <mat-card-content>
-    Date: {{ ticket.showDate }} <br />
-    Time: {{ ticket.showTime }} <br />
-    Seats: {{ ticket.seatNo.join(', ') }}
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="warn" (click)="cancelTicket(ticket.ticketId)">Cancel</button>
-  </mat-card-actions>
-</mat-card>
+<ng-container *ngIf="tickets.length > 0; else noBookings">
+  <!-- Hidden PDF Templates -->
+  <div *ngFor="let ticket of tickets" [id]="'ticket-content-' + ticket.ticketId" class="pdf-template" [hidden]="showPdfTemplateId !== ticket.ticketId">
+    <div class="ticket-pdf">
+      <h1>Movie Ticket</h1>
+      <div class="ticket-details">
+        <h2>{{ticket.movieTitle}}</h2>
+        <div class="detail-row">
+          <strong>Theatre:</strong> {{ticket.theatreName}} | Screen {{ticket.screenNumber}}
+        </div>
+        <div class="detail-row">
+          <strong>Date:</strong> {{ticket.showDate}}
+          <strong>Time:</strong> {{ticket.showTime}}
+        </div>
+        <div class="detail-row">
+          <strong>Seats:</strong> {{getSeatLabels(ticket.seatNo)}}
+        </div>
+        <div class="detail-row">
+          <strong>Customer:</strong> {{ticket.customerName}}
+        </div>
+        <div class="detail-row">
+          <strong>Price:</strong> ₹{{ticket.ticketPrice}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visible Booking Cards -->
+  <div class="bookings-grid">
+    <div *ngFor="let ticket of tickets" class="booking-card">
+      <div class="booking-content">
+        <div class="booking-header">
+          <span class="movie-title">{{ ticket.movieTitle }}</span>
+          <span class="ticket-price">₹{{ ticket.ticketPrice }}</span>
+        </div>
+        <div class="booking-details">
+          <div>
+            <mat-icon class="icon">theaters</mat-icon>
+            <span>{{ ticket.theatreName }}</span>
+            <span class="screen">| Screen {{ ticket.screenNumber }}</span>
+          </div>
+          <div>
+            <mat-icon class="icon">event</mat-icon>
+            <span>{{ ticket.showDate }}</span>
+            <mat-icon class="icon">schedule</mat-icon>
+            <span>{{ ticket.showTime }}</span>
+          </div>
+          <div>
+            <mat-icon class="icon">event_seat</mat-icon>
+            <span>Seats:</span>
+            <ng-container *ngFor="let seat of getSeatLabels(ticket.seatNo).split(', ')">
+              <span class="seat-pill">{{ seat }}</span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="booking-actions">
+        <button mat-flat-button color="primary" (click)="downloadTicketPDF(ticket)">
+          <mat-icon>download</mat-icon> Download PDF
+        </button>
+        <button mat-flat-button color="warn" (click)="cancelTicket(ticket.ticketId)">
+          <mat-icon>cancel</mat-icon> Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noBookings>
+  <mat-card class="no-bookings-card">
+    <mat-card-content>
+      <p>You have made 0 bookings.</p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

@@ -1,0 +1,70 @@
+.manage-users-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.snackbar-success {
+  background: #43a047 !important;
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}
+
+.snackbar-cancel {
+  background: #fbc02d !important;
+  color: #333 !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}
+
+h2 {
+  margin-bottom: 24px;
+  color: #3f51b5;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.users-table th, .users-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.users-table th {
+  background: #f5f7ff;
+  font-weight: 600;
+}
+
+.users-table tr:last-child td {
+  border-bottom: none;
+}
+
+.error {
+  color: #d32f2f;
+  margin-bottom: 16px;
+}
+
+button[mat-icon-button] {
+  margin-right: 4px;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.clickable-row:hover {
+  background: #f5f7ff;
+}

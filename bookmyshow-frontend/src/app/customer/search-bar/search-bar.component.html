@@ -1,0 +1,12 @@
+<div class="search-bar-container">
+  <mat-form-field appearance="outline" class="search-bar">
+    <mat-label>Search movies...</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (keyup.enter)="onSearch()">
+    <button mat-icon-button matSuffix (click)="onSearch()" aria-label="Search">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-icon-button color="warn" class="close-btn" (click)="onClose()" aria-label="Close Search">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

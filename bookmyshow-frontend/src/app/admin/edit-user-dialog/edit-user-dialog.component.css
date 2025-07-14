@@ -1,0 +1,15 @@
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 18px;
+}
+
+[mat-dialog-actions] {
+  margin-top: 18px;
+}
+
+button[mat-flat-button] {
+  min-width: 90px;
+}

@@ -8,7 +8,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./theatre-owner-dashboard.component.css']
 })
 export class TheatreOwnerDashboardComponent implements OnInit {
-  theatre: any;
+  theatres: any[] = [];
   totalScreens: number = 0;
   totalShows: number = 0;
   totalSeats: number = 0;
@@ -21,39 +21,43 @@ export class TheatreOwnerDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const ownerId = this.tokenService.getUserId();
-
     if (!ownerId) {
       console.warn('User ID not found');
       return;
     }
 
-    this.theatreService.getTheatre(ownerId).subscribe({
+    this.theatreService.getTheatresByOwner(ownerId).subscribe({
       next: (res: any) => {
-        this.theatre = res?.theatre;
-        const screens = this.theatre?.screens ?? [];
+        const responseData = res.data ?? res;
+        const theatreData = responseData?.theatres;
 
-        this.totalScreens = screens.length;
-
-        this.totalShows = screens.reduce((showCount: number, screen: any) => {
-          return showCount + (screen.shows?.length ?? 0);
-        }, 0);
-
-        this.totalSeats = screens.reduce((seatSum: number, screen: any) => {
-          return seatSum + (screen.shows?.reduce((sum: number, show: any) => {
-            return sum + (show.availableSeats?.length ?? 0);
-          }, 0) ?? 0);
-        }, 0);
-
-        this.totalRevenue = screens.reduce((revenue: number, screen: any) => {
-          return revenue + (screen.shows?.reduce((sum: number, show: any) => {
-            const ticketPrice = show.ticketPrice ?? 0;
-            const totalSeats = show.availableSeats?.length ?? 0;
-            const seatsSold = show.totalSeats ? show.totalSeats - totalSeats : 0;
-            return sum + (ticketPrice * seatsSold);
-          }, 0) ?? 0);
-        }, 0);
+        if (Array.isArray(theatreData)) {
+          this.theatres = theatreData;
+        } else if (theatreData) {
+          this.theatres = [theatreData];
+        } else {
+          this.theatres = [];
+        }
+        
+        this.calculateTotals();
       },
-      error: err => console.error('Error fetching theatre:', err)
+      error: (err: any) => console.error('Error fetching theatres:', err)
     });
+  }
+
+  calculateTotals(): void {
+    this.totalScreens = 0;
+    this.totalShows = 0;
+
+    for (const theatre of this.theatres) {
+      if (theatre.screens) {
+        this.totalScreens += theatre.screens.length;
+        for (const screen of theatre.screens) {
+          if (screen.shows) {
+            this.totalShows += screen.shows.length;
+          }
+        }
+      }
+    }
   }
 }
